@@ -16,13 +16,50 @@ const Product = createSlice({
         item:[],
     },
     reducers:{
-        add(state,action){
-        state.item.push(action.payload);  
-        },
+        add(state, action) {
+            const existingItem = state.item.find(item => item.id === action.payload.id);
+            if (existingItem) {
+              existingItem.quantity += 1;
+            } else {
+              state.item.push({ ...action.payload, quantity: 1 });
+            }
+          },
+          
         remove(state,action){
             console.log("id",action.payload);
             state.item= state.item.filter((res)=>res.id!=action.payload)
-        }
+        },
+        search(state, action) {
+            const newData = state.Data
+            const searchValue = action.payload.toLowerCase();
+          
+            if (searchValue.length >= 3) {
+              state.Data = state.Data.filter((res) =>
+                res.title.toLowerCase().includes(searchValue)
+              );
+            } else {
+                console.log("this is the else statement ")
+              state.Data = newData
+            }
+          },
+          addQuantity(state, action) {
+            const itemId = action.payload;
+            const itemToUpdate = state.item.find(item => item.id === itemId);
+          
+            if (itemToUpdate) {
+              itemToUpdate.quantity += 1;
+            }
+          },
+          removeQuantity(state, action) {
+            const itemId = action.payload;
+            const itemToUpdate = state.item.find(item => item.id === itemId);
+          
+            if (itemToUpdate) {
+              itemToUpdate.quantity -= 1;
+            }
+          }
+          
+          
     },
     extraReducers:{
         [FetchData.pending]:(state,action)=>{
@@ -40,6 +77,6 @@ const Product = createSlice({
     
 });
 
-export const {add,remove} = Product.actions
+export const {add,remove,search,addQuantity,removeQuantity} = Product.actions
 
 export default Product.reducer

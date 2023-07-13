@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
  <Provider store={store}>
 
     <BrowserRouter>
-    <App />
+    <App  />
     </BrowserRouter>
  </Provider>
   </React.StrictMode>,

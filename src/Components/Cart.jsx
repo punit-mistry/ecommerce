@@ -1,19 +1,21 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { remove } from "../Redux/Productslice";
-import { addQuantity,removeQuantity } from "../Redux/Productslice";
+import { addQuantity, removeQuantity } from "../Redux/Productslice";
+import { Link } from "react-router-dom";
 const Cart = () => {
   const Dispatch = useDispatch();
   const item = useSelector((state) => state.product.item);
   const Remove = (_a) => {
     Dispatch(remove(_a));
   };
-  const handleadd =(_a)=>{
-    Dispatch(addQuantity(_a))
-  }
-  const handleRemove =(_a)=>{
-    Dispatch(removeQuantity(_a))
-  }
+  const handleadd = (_a) => {
+    Dispatch(addQuantity(_a));
+  };
+  const handleRemove = (_a) => {
+    Dispatch(removeQuantity(_a));
+  };
+
   return (
     <>
       <div className="flex flex-col m-10 gap-3 ">
@@ -34,10 +36,11 @@ const Cart = () => {
                   <span className="font-bold">{res.price}</span>
                   <br />
                   <span>
-                    quantity: <button onClick={()=>handleadd(res.id)}>+</button> &nbsp;
+                    quantity:{" "}
+                    <button onClick={() => handleadd(res.id)}>+</button> &nbsp;
                     <span className="font-bold">{res.quantity}</span>
                     &nbsp;&nbsp;
-                    <button onClick={()=>handleRemove(res.id)}>-</button>
+                    <button onClick={() => handleRemove(res.id)}>-</button>
                   </span>
                   <br />
                   <br />
@@ -56,6 +59,26 @@ const Cart = () => {
             No Item in the cart...
           </div>
         )}
+        {item.length !== 0 && (
+          <>
+            <div className=" text-right">
+              Total of all prices: $
+              <span className="font-extrabold">
+                {Math.round(item.reduce((acc, res) => acc + res.Total_sum, 0))}
+              </span>
+            </div>
+          </>
+        )}
+        <br />
+        <div>
+          <button className="bg-blue-700 w-32 h-8 rounded-lg font-bold text-white">
+            CheckOut
+          </button>
+          &nbsp; &nbsp;
+          <button className="bg-green-700 w-32 h-8 rounded-lg font-bold text-white">
+            <Link to="/product">Buy More</Link> &nbsp;
+          </button>
+        </div>
       </div>
     </>
   );

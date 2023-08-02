@@ -3,8 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { remove } from "../Redux/Productslice";
 import { addQuantity, removeQuantity } from "../Redux/Productslice";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Checkout from "./Checkout";
 const Cart = () => {
   const Dispatch = useDispatch();
+  const navigate = useNavigate();
   const item = useSelector((state) => state.product.item);
   const Remove = (_a) => {
     Dispatch(remove(_a));
@@ -71,9 +74,19 @@ const Cart = () => {
         )}
         <br />
         <div>
-          <button className="bg-blue-700 w-32 h-8 rounded-lg font-bold text-white">
+          {/* <button
+            className="bg-blue-700 w-32 h-8 rounded-lg font-bold text-white"
+            onClick={Checkout}
+          >
             CheckOut
-          </button>
+          </button> */}
+          <Checkout cart={item} />
+          <form
+            action="/create-checkout-session"
+            method="POST"
+          >
+            <button type="submit">Checkout</button>
+          </form>
           &nbsp; &nbsp;
           <button className="bg-green-700 w-32 h-8 rounded-lg font-bold text-white">
             <Link to="/product">Buy More</Link> &nbsp;

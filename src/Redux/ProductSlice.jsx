@@ -12,6 +12,7 @@ const Product = createSlice({
     Data: [],
     isError: false,
     item: [],
+    Login: false,
   },
   reducers: {
     add(state, action) {
@@ -82,6 +83,22 @@ const Product = createSlice({
         itemToUpdate.quantity -= 1;
       }
     },
+    login(state, action) {
+      if (
+        action.payload.username.toLowerCase() == "admin" &&
+        action.payload.password.toLowerCase() == "admin@123"
+      ) {
+        return {
+          ...state,
+          loggedIn: true,
+        };
+      } else {
+        return {
+          ...state,
+          loggedIn: false,
+        };
+      }
+    },
   },
   extraReducers: {
     [FetchData.pending]: (state, action) => {
@@ -96,7 +113,7 @@ const Product = createSlice({
   },
 });
 
-export const { add, remove, search, addQuantity, removeQuantity } =
+export const { add, remove, search, addQuantity, removeQuantity, login } =
   Product.actions;
 
 export default Product.reducer;

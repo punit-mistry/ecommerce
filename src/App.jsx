@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Home from "./Components/Home";
@@ -11,18 +11,24 @@ import CheckoutPage from "./Pages/Checkout";
 import CheckoutSuccess from "./Pages/CheckoutSuccess";
 const App = () => {
   // Get the login state from Redux
-  const isLoggedIn = useSelector((state) => state.product.loggedIn);
-
+  const isLoggedIn = useState(() => {
+    if (localStorage.getItem("isLogged") == "true") {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  console.log(isLoggedIn);
   return (
     <div className="font-serif">
-      {isLoggedIn && <Navbar />}
+      {isLoggedIn[0] && <Navbar />}
       <Routes>
         {/* Show Home, Product, and Cart when logged in */}
         <Route
           path="/CheckoutSuccess"
           element={<CheckoutSuccess />}
         />
-        {isLoggedIn ? (
+        {isLoggedIn[0] ? (
           <>
             <Route
               path="/"
@@ -49,7 +55,7 @@ const App = () => {
           />
         )}
       </Routes>
-      {isLoggedIn && <Footer />}
+      {isLoggedIn[0] && <Footer />}
     </div>
   );
 };

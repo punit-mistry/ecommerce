@@ -88,6 +88,8 @@ const Product = createSlice({
         action.payload.username.toLowerCase() == "admin" &&
         action.payload.password.toLowerCase() == "admin@123"
       ) {
+        localStorage.setItem("isLogged", true);
+        location.reload();
         return {
           ...state,
           loggedIn: true,

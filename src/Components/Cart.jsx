@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { remove } from "../Redux/Productslice";
 import { addQuantity, removeQuantity } from "../Redux/Productslice";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Checkout from "./Checkout";
 const Cart = () => {
   const Dispatch = useDispatch();
+  const [isloading, setIsloading] = useState(false);
   const navigate = useNavigate();
   const item = useSelector((state) => state.product.item);
   const Remove = (_a) => {
@@ -21,11 +22,17 @@ const Cart = () => {
 
   return (
     <>
+      {isloading && (
+        <div className="absolute bg-gray-600 bg-opacity-60 w-full h-[100vh]  z-50 flex justify-center items-center">
+          <span className="text-xl text-black font-extrabold animate-spin"></span>
+        </div>
+      )}
+
       <div className="flex flex-col m-10 gap-3 ">
         {item &&
           item.map((res) => {
             return (
-              <div className="  bg-gray-300 h-44 flex  px-10 items-center gap-5">
+              <div className="  bg-gray-300 h-44 flex  px-10 items-center gap-5 relative ">
                 <div>
                   <img
                     src={res.image}
@@ -81,12 +88,6 @@ const Cart = () => {
             CheckOut
           </button> */}
           <Checkout cart={item} />
-          <form
-            action="/create-checkout-session"
-            method="POST"
-          >
-            <button type="submit">Checkout</button>
-          </form>
           &nbsp; &nbsp;
           <button className="bg-green-700 w-32 h-8 rounded-lg font-bold text-white">
             <Link to="/product">Buy More</Link> &nbsp;

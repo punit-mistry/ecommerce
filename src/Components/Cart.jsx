@@ -43,16 +43,15 @@ const Cart = () => {
                 <div className="min-w-[550px] max-w-[550px]">
                   <span>{res.title}</span>
                   <br />
-                  <span className="font-bold">{res.price}</span>
+                  <span className="font-bold">$ {Math.round(res.price)}</span>
                   <br />
-                  <span>
+                  {/* <span>
                     quantity:{" "}
                     <button onClick={() => handleadd(res.id)}>+</button> &nbsp;
                     <span className="font-bold">{res.quantity}</span>
                     &nbsp;&nbsp;
                     <button onClick={() => handleRemove(res.id)}>-</button>
-                  </span>
-                  <br />
+                  </span> */}
                   <br />
                   <button
                     className="bg-purple-700 font-bold text-white w-24 h-10 rounded-lg hover:bg-purple-600 transition"
@@ -60,6 +59,25 @@ const Cart = () => {
                   >
                     Remove
                   </button>
+                </div>
+                <div className="  w-full text-right">
+                  <span>
+                    <button
+                      onClick={() => handleadd(res.id)}
+                      className="border-2  border-black text-lg p-2 w-10 rounded-lg bg-gray-400"
+                    >
+                      +
+                    </button>{" "}
+                    &nbsp;
+                    <span className="font-bold">{res.quantity}</span>
+                    &nbsp;&nbsp;
+                    <button
+                      className="border-2  border-black text-lg p-2 w-10 rounded-lg bg-gray-400"
+                      onClick={() => handleRemove(res.id)}
+                    >
+                      -
+                    </button>
+                  </span>
                 </div>
               </div>
             );
@@ -72,10 +90,14 @@ const Cart = () => {
         {item.length !== 0 && (
           <>
             <div className=" text-right">
+              ------------------------------
+              <br />
               Total of all prices: $
               <span className="font-extrabold">
                 {Math.round(item.reduce((acc, res) => acc + res.Total_sum, 0))}
               </span>
+              <br />
+              ------------------------------
             </div>
           </>
         )}

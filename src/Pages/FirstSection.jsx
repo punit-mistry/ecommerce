@@ -8,14 +8,22 @@ import Men from "../assets/men.jpg";
 const FirstSection = () => {
   const Logo = [Nike, Adidas, Burberry, LV, Puma];
   const Model = [];
+
+  const ImageStyle = {
+    animation: "marquee 10s linear infinite",
+  };
   return (
     <div className="p-10 flex  flex-col  h-full gap-10">
-      <div className="h-52  w-full flex justify-center gap-7 shadow-xl rounded-3xl">
+      <div
+        // style={}
+        className="h-52  w-full flex justify-center gap-7  rounded-3xl  "
+      >
         {Logo.map((res) => (
           <img
             src={res}
             alt={"img"}
-            className="mix-blend-darken h-full"
+            className="mix-blend-darken h-full hover:-translate-y-14 transition-all bg-green-300"
+            style={{ filter: "drop-shadow(5px 5px 10px rgba(0,0,0,0.5))" }}
           />
         ))}
       </div>

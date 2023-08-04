@@ -14,7 +14,13 @@ const Navbar = () => {
   return (
     <>
       <div className="bg-blue-800 text-white font-bold flex justify-between p-5 ">
-        <div>Logo</div>
+        <div>
+          <img
+            src="https://rippermovies.netlify.app/assets/logo-9aa8107a.png"
+            alt="logo"
+            className="w-14 rotate-180 bg-slate-300 rounded-xl "
+          />
+        </div>
         <div className="flex gap-5 items-center">
           <div>
             <Link to="/">Home</Link> &nbsp; <Link to="/product">Product</Link>{" "}
@@ -31,7 +37,7 @@ const Navbar = () => {
           </div>
           <div>
             <button
-              className="w-24 h-10 bg-gray-400 text-black hover:bg-gray-600 hover:text-white font-bold font-sans rounded-lg transition delay-150"
+              className="w-24 h-10 bg-slate-300 text-black hover:bg-gray-600 hover:text-white font-bold font-sans rounded-lg transition delay-150"
               onClick={logOut}
             >
               Logout

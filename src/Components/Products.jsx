@@ -21,7 +21,6 @@ const Home = () => {
     Dispatch(search(_a));
   };
   const myArray = Array(5).fill(0);
-  const [isGreen, setIsGreen] = useState(false);
 
   return (
     <div className=" text-center p-5 ">
@@ -86,9 +85,7 @@ const Home = () => {
               </div>
               <div>
                 <button
-                  className={`w-52 h-8 rounded-lg text-white font-bold transition ${
-                    isGreen ? "bg-green-600" : "bg-gray-600"
-                  } ${isGreen ? "" : "hover:bg-gray-100 hover:text-black"}`}
+                  className={`w-52 h-8 rounded-lg text-white font-bold transition bg-gray-500 hover:bg-gray-100 hover:text-black`}
                   onClick={() => handleAdd(res)}
                 >
                   Add To Cart
